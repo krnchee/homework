@@ -29,9 +29,11 @@ Array.prototype.twoSum = function() {
 
 Array.prototype.transpose = function() {
   const transArr = Array.from(
-    { length: this[0].length }
-    () => Array.from({ length: this.length })
+    {length: this[0].length},
+    () => Array.from({length: this.length})
   );
+
+
 
   console.log(transArr);
 
