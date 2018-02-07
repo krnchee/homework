@@ -1,44 +1,40 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
 
-<ul id="dogs"></ul>
+<ul class="cool-things">
+  <li>Racecars</li>
+  <li>Lasers</li>
+  <li>Aeroplanes</li>
+</ul>
+
+<form id="cool-thing-form">
+  <label>
+    Cool Thing
+    <input type="text" id="cool_thing">
+  </label>
+
+  <input type="submit" value="Create Cool Thing">
+</form>
 
 <script>
-  const DOGS = {
-    101: {
-      id: 101,
-      name: "Sable",
-      genus: "Husky Huskius"
-    },
+const $form = $("#cool-thing-form");
+$form.on("submit", event => {
+event.preventDefault();
 
-    234: {
-      id: 234,
-      name: "Blixa",
-      genus: "Corgi Corgiorum"
-    }
-  };
+const $input = $("#cool_thing");
+const coolThing = $input.val();
+$input.val("");
 
-  // Fill $dogsUl with list items; one per dog.
-  const $dogsUl = $("ul#dogs");
-  Object.keys(DOGS).forEach( id => {
-    const dog = DOGS[id];
+const $li = $("<li></li>").text(coolThing);
+$li.on("mouseover", mouseoverCallback);
+$("ul.cool-things").append($li);
+});
 
-    const $dogLi = $("<li class='dog'></li>");
-    $dogLi.text(dog.name + " -- " + dog.genus);
+const $listItems = $("li");
+$listItems.on("mouseover", mouseoverCallback);
 
-    // store the dog's id in a **data-* attribute**
-    $dogLi.data("id", dog.id);
-
-    $dogsUl.append($dogLi);
-  });
-
-  // Install click handlers on the li.dog elements.
-  $("li.dog").on("click", event => {
-    const $dogLi = $(event.currentTarget);
-
-    // pull dog id out of the DOM to identify the dog.
-    const dogId = $dogLi.data("id");
-    const dog = DOGS[dogId];
-
-    alert(dog.name + " loves you!");
-  });
+mouseoverCallback = event => {
+const currentTarget = event.currentTarget;
+const $currentTarget = $(currentTarget);
+alert($currentTarget.text());
+}
 </script>
